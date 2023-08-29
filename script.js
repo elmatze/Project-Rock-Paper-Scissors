@@ -1,19 +1,21 @@
 
-// Arbeitsauftrag 28.08.
-//      git commit -m "..."
-//      .toLowerCase einbauen, um jegliche Eingaben indirekt case-insensitive zu gestalten
-//      Dadurch, dass somit sowieso alle Outputs (hier return "...") gleich wären ersetzen wir die ${Variablen} durch die dazugehörigen Strings, wie "Rock"
-
-
-
 let playerScore = 0;
 let computerScore = 0;
+let playerSelection;
+let playerSelectionUsable;
 
-//  Together with Alternative (l.102)
-//  const computersPlay = ["Rock", "Paper", "Scissors"]
-
+//  Together with Alternative (l.117)
+const computersPlay = ["Rock", "Paper", "Scissors"]
 
 game()
+
+function changeInput(playerSelection) {
+    const playerSelectionUsable = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+    return playerSelectionUsable;
+}
+
+
+
 
 function game() {
 
@@ -26,12 +28,22 @@ function game() {
             console.log("Too bad you are trapped! Play until the game is over, noob.")
         }
 
-    const playerSelection = prompt("Choose between 'Rock', 'Paper', 'Scissors'", "Rock, Paper, Scissors");
+        playerSelection = prompt("Choose between 'Rock', 'Paper', 'Scissors'", "Rock, Paper, Scissors");
+        changeInput(playerSelection)
+
+        playerSelectionUsable = changeInput(playerSelection);
+        
+
+        
+
     const computerSelection = getComputerChoice();
 
-    console.log(`That was your choice: ${playerSelection}`);
+
+
+    console.log(`That was your choice: ${changeInput(playerSelection)}`);
+
     console.log(`That was the Computer's choice: ${computerSelection}`);
-    console.log(playRound(playerSelection, computerSelection));
+    console.log(playRound(playerSelectionUsable, computerSelection));
 
     console.log(`Computer: ${computerScore} -  You: ${playerScore}`);
     console.log(" ");
@@ -46,40 +58,40 @@ function game() {
 }
 
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection == computerSelection) {
-        return `You both have selected ${playerSelection}, that's a tie. Play again!`
+function playRound(playerSelectionusable, computerSelection) {
+    if (playerSelectionUsable == computerSelection) {
+        return `You both have selected ${playerSelectionUsable}, that's a tie. Play again!`
     }
     
-    else if (playerSelection == "Rock" && computerSelection == "Paper") {
+    else if (playerSelectionusable == "Rock" && computerSelection == "Paper") {
         computerScore++;
-        return `You lost! ${computerSelection} beats ${playerSelection}.`
+        return `You lost! ${computerSelection} beats ${playerSelectionUsable}.`
     }
 
-    else if (playerSelection == "Paper" && computerSelection == "Scissors") {
+    else if (playerSelectionUsable == "Paper" && computerSelection == "Scissors") {
         computerScore++;
-        return `You lost! ${computerSelection} beats ${playerSelection}.`
+        return `You lost! ${computerSelection} beats ${playerSelectionUsable}.`
     }
 
-    else if (playerSelection == "Scissors" && computerSelection == "Rock") {
+    else if (playerSelectionUsable == "Scissors" && computerSelection == "Rock") {
         computerScore++;
-        return `You lost! ${computerSelection} beats ${playerSelection}.`
+        return `You lost! ${computerSelection} beats ${playerSelectionUsable}.`
     }
 
 
-    else if (playerSelection == "Rock" && computerSelection == "Scissors") {
+    else if (playerSelectionUsable == "Rock" && computerSelection == "Scissors") {
         playerScore++;
-        return `You won! ${playerSelection} beats ${computerSelection}.`
+        return `You won! ${playerSelectionUsable} beats ${computerSelection}.`
     }
 
-    else if (playerSelection == "Paper" && computerSelection == "Rock") {
+    else if (playerSelectionUsable == "Paper" && computerSelection == "Rock") {
         playerScore++;
-        return `You won! ${playerSelection} beats ${computerSelection}.`
+        return `You won! ${playerSelectionUsable} beats ${computerSelection}.`
     }
 
-    else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+    else if (playerSelectionUsable == "Scissors" && computerSelection == "Paper") {
         playerScore++;
-        return `You won! ${playerSelection} beats ${computerSelection}.`
+        return `You won! ${playerSelectionUsable} beats ${computerSelection}.`
     }
 }
 
@@ -98,6 +110,7 @@ function playRound(playerSelection, computerSelection) {
 //         return "Scissors";
 //     }
 // }
+
 
 //Alternative getComputerChoice():
 
